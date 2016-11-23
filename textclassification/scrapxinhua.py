@@ -79,7 +79,7 @@ def get_news_body(url):#抓取新闻主体内容
 
 def clean_chinese_character(text):
     '''处理特殊的中文符号,将其全部替换为'-' 否则在保存时Windows无法将有的中文符号作为路径'''
-    chars = chars = ["/", "\"", "'", "·", "。","？", "！", "，", "、", "；", "：", "‘", "’", "“", "”", "（", "）", "…", "–", "．", "《", "》","|","?",","];
+    chars = chars = ["/", "\"", "'", "·", "。","？", "！", "，", "、", "；", "：", "‘", "’", "“", "”", "（", "）", "…", "–", "．", "《", "》","|","?",",","<",">"];
     new_text = ""
     for i in range(len(text)):
         if text[i] not in chars:
@@ -132,13 +132,13 @@ origin_url="http://www.yangtse.com"
 origin_pattern = {"class": "left"}
 news="F:/news"
 
-print("deleting old dir")
-if os.path.exists(news):
-    shutil.rmtree(news,True)
+# print("deleting old dir")
+# if os.path.exists(news):
+    # shutil.rmtree(news,True)
 
-print("creating dir: ", news)
-os.mkdir(news)
-class_list=getClasslink(origin_url, origin_pattern)
+# print("creating dir: ", news)
+# os.mkdir(news)
+class_list=getClasslink(origin_url,  )
 print("\ngetting news")
 
 for x in class_list:
@@ -146,6 +146,8 @@ for x in class_list:
     arr=class_url.split('/');
     type_len=len(arr)
     news_type=arr[type_len-2]
+    # print(news_type)
+    # if news_type=="shiping":
     title=news+'/'+news_type
     if not os.path.exists(title):
         os.mkdir(title)

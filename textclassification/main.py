@@ -19,10 +19,10 @@ def writeFile(arr,file_path):
     f.close()
 
     
-#doc word
+# doc word
 # rootdir = "F:\\doc"
 # for test
-rootdir="F:/train"
+rootdir="F:/dataset"
 w=[]
 dir = os.walk(rootdir)
 print("word:")
@@ -39,6 +39,16 @@ for parent,dirnames,filenames in dir:    #三个参数：分别返回1.父目录
         for wa in arr:
             tempw.append(wa)
         w.append(tempw)
+# file_object = codecs.open("F:/train/#断货王#双十一买什么 保险又好用的囤货指南在此new.txt",'r','utf-8')
+# try:
+    # all_the_text = file_object.read()
+    # arr=all_the_text.split()
+    # tempw=[]
+    # for wa in arr:
+        # tempw.append(wa)
+    # w.append(tempw)
+# finally:
+    # file_object.close()
 #vocab
 v=[]
 print("vocab:")     
@@ -52,9 +62,9 @@ arr=all_the_text.split()
 for wa in arr:
     v.append(wa)
 
-k=100
-alpha=0.2
-beta=0.01
+k=25
+alpha=2
+beta=0.1
 maxiter=1000
 epsino=0
 theta=[]
@@ -62,6 +72,7 @@ fi=[]
 v1=len(v)
 print(v1)
 m=len(w)
+print(m)
 for i in range(m):
     theta.append([0]*k)
 for i in range(k):
@@ -74,15 +85,15 @@ sys.path.append('F:/python')
 (theta,fi)=gibbssample(w,alpha,beta,k,v,maxiter,epsino)
 
 # write fi,theta to txt
-# file_path='F:/python/fi.txt'
-# writeFile(fi,file_path)
-# file_path='F:/python/theta.txt'
-# writeFile(theta,file_path)
+file_path='F:/python/fi.txt'
+writeFile(fi,file_path)
+file_path='F:/python/theta.txt'
+writeFile(theta,file_path)
 
 # for test data
-file_path='F:/python/testfi.txt'
-writeFile(fi,file_path)
-file_path='F:/python/testtheta.txt'
-writeFile(theta,file_path)
+# file_path='F:/python/testfi.txt'
+# writeFile(fi,file_path)
+# file_path='F:/python/testtheta.txt'
+# writeFile(theta,file_path)
 
 

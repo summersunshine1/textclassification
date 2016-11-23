@@ -2,8 +2,8 @@
 #divide doc into train doc and test doc
 import shutil
 import os
-rootdir = "F:/doc"
-dst = "F:/train"
+rootdir = "F:/answer"
+dst = "F:/answertest"
 
 dir = os.walk(rootdir)
 for parent,dirnames,filenames in dir:    #三个参数：分别返回1.父目录 2.所有文件夹名字（不含路径） 3.所有文件名字

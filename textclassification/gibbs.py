@@ -2,14 +2,20 @@
 import random
 
 def updatetheme(k,alpha,beta,totalnm,totalnk,nm,nk,docindex,wordindex,v1):
-    maxi=-1
-    maxp=0
+    topic=0
+    p=[]
     for i in range(k):
-        p=((nm[docindex][i]+alpha)/(totalnm[docindex]+k*alpha))*(nk[i][wordindex]+beta)/(totalnk[i]+v1*beta)
-        if p>maxp:
-            maxp=p
-            maxi=i
-    return maxi
+        p.append(0)
+    
+    p[0]=((nm[docindex][0]+alpha)/(totalnm[docindex]+k*alpha))*(nk[0][wordindex]+beta)/(totalnk[0]+v1*beta)
+    for i in range(1,k):
+        p[i] = ((nm[docindex][i]+alpha)/(totalnm[docindex]+k*alpha))*(nk[i][wordindex]+beta)/(totalnk[i]+v1*beta)+p[i-1]
+    u=random.random()*p[k-1]
+    for i in range(k):
+        if p[i]>u:
+            topic=i
+            break
+    return topic        
 
 def sampleperiod(totalnm,totalnk,nm,nk,w,alpha,beta,k,v,zarr,d):
     m=len(w)
@@ -101,7 +107,7 @@ def gibbssample(w,alpha,beta,k,v,maxiter,epsino):#w document*word(m,n) alpha 1*k
         (nm,nk,totalnm,totalnk)=sampleperiod(totalnm,totalnk,nm,nk,w,alpha,beta,k,v,zarr,d);
         # if abs(theta-old_theta)<epsino && abs(fi-old_fi)<epsino
             # break;
-        print("period end")
+        print("period " + str(i) +" end")
     
     theta=gettheta(theta,alpha,nm,totalnm,w,k)
     fi=getfi(fi,beta,nk,totalnk,v,k)

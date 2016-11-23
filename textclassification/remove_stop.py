@@ -50,13 +50,13 @@ def remove_words(file_path):
     create_txt(file_path, final)
         
 
-rootdir = "F:\\doc"
+rootdir = "F:\\dataset"
 
 dir = os.walk(rootdir)
 for parent,dirnames,filenames in dir:    #三个参数：分别返回1.父目录 2.所有文件夹名字（不含路径） 3.所有文件名字
     for filename in filenames:                        #输出文件信息
         path_name=os.path.join(parent,filename)
         if not path_name.rfind('new')==-1:
-            os.remove(path_name)
+            # os.remove(path_name)
             continue
         remove_words(path_name)

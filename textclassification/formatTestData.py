@@ -2,9 +2,7 @@
 import os
 import codecs
 
-def formatonecate(theta,category):
-    currentcate=0
-    catenum=category[currentcate]
+def formatonecate(theta):
     m=len(theta)
     trainpath="F:\\python\\test.txt"
     if os.path.exists(trainpath):
@@ -14,6 +12,7 @@ def formatonecate(theta,category):
         for i in range(m):
             train_file.write(str(1))
             train_file.write(' ')
+            n=len(theta[i])
             for j in range(n):
                 train_file.write(str(j+1)+':')
                 train_file.write(theta[i][j]+' ')
@@ -35,5 +34,5 @@ try:
 finally:
     theta_file.close()
 
-formatonecate(theta,category)
+formatonecate(theta)
 

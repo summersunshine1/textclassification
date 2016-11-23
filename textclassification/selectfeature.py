@@ -4,7 +4,7 @@ import codecs
 import math
 
 def frequency(t,w):
-    alpha=1
+    alpha=0
     m=len(w)
     for i in range(m):
         dic = dict()
@@ -18,7 +18,7 @@ def frequency(t,w):
                 else:
                     dic[word]=1
         for k,v in dic.items():
-            alpha=alpha*v/n
+            alpha=alpha+v/n
     return alpha
         
 def accuracy(M,A,B):
@@ -58,11 +58,10 @@ def create_txt(file_path, vocabarr):
         f.write(word)
         f.write('\n')
     f.close()
-         
-def improvechi(topicwords):
-    rootdir = "F:\\doc"
+    
+def getcw(catagory):
+    rootdir = "F:\\dataset"
     dir = os.walk(rootdir)
-    catogory=20
     totalcw=[]
     totaldoc=0
     wordset=set()#store dict words
@@ -84,33 +83,60 @@ def improvechi(topicwords):
             cw.append(tempw)
         if not len(cw)==0:
             totalcw.append(cw)
-    print("handle doc begin")        
-    for i in range(catogory):
-        cw=totalcw[i]
-        m=len(cw)
-        dic = dict()
-        for j in range(m):
-            w=cw[j]
-            for k in range(len(w)):
-                word=w[k]
-                if word in dic:
-                    continue
-                (A,B,re)=chi(word,i,totalcw)
-                beta=accuracy(catogory,A,B)
-                alpha=frequency(word,w)
-                dic[word]=re*beta*alpha
-        re=sorted(dic,key=dic.get,reverse=True)
-        a=0
-        for c in range(len(re)):
-            a+=1
-            if a>topicwords:#every topic treat topwords as its fature
-                break
-            wordset.add(re[c])
-        wordset.add("topic")
-        print("one catogory end")
-    create_txt("F:\\python\\vocab.txt", wordset)
+    return totalcw
 
-improvechi(300)
+def improvechi(topicwords,cata,totalcw,catagory):  
+    print("handle doc begin")        
+    i=cata
+    cw=totalcw[i]
+    m=len(cw)
+    dic = dict()
+    for j in range(m):
+        w=cw[j]
+        for k in range(len(w)):
+            word=w[k]
+            if word in dic:
+                continue
+            (A,B,re)=chi(word,i,totalcw)
+            dic[word]=re
+            beta=accuracy(catagory,A,B)
+            alpha=frequency(word,w)
+            dic[word]=re*beta*alpha
+    re=sorted(dic,key=dic.get,reverse=True)
+    a=0
+    for c in range(len(re)):
+        a+=1
+        if a>topicwords:#every topic treat topwords as its fature
+            break
+        wordset.add(re[c])
+    print("one catogory end")
+    path="F:/python/vocab/"
+    path += str(cata)+".txt";
+    create_txt(path, wordset)
+
+def combinefile():
+    rootdir = "F:/python/vocab/"
+    dir = os.walk(rootdir)    
+    finalpath="F:/python/vocab.txt"
+    word=[]
+    for parent,dirnames,filenames in dir:    #三个参数：分别返回1.父目录 2.所有文件夹名字（不含路径） 3.所有文件名字
+        for filename in filenames:#输出文件信息
+            path_name=os.path.join(parent,filename)
+            file_object = codecs.open(path_name,'r','utf-8')
+            try:
+                all_the_text = file_object.read()
+            finally:
+                file_object.close()
+            arr=all_the_text.split()
+            for i in range(len(arr)):
+                word.append(arr[i])
+    create_txt(finalpath, word)
+    if os.path.exists(rootdir):
+        os.remove(rootdir)
+    
+            
+            
+
     
             
             
