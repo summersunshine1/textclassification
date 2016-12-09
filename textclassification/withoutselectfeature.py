@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os
 import codecs
-rootdir = "F:/dataset"
+rootdir = "F:/souhutrain"
 dir = os.walk(rootdir)
 w=[]
 for parent,dirnames,filenames in dir:    #Èı¸ö²ÎÊı£º·Ö±ğ·µ»Ø1.¸¸Ä¿Â¼ 2.ËùÓĞÎÄ¼ş¼ĞÃû×Ö£¨²»º¬Â·¾¶£© 3.ËùÓĞÎÄ¼şÃû×Ö
@@ -16,7 +16,7 @@ for parent,dirnames,filenames in dir:    #Èı¸ö²ÎÊı£º·Ö±ğ·µ»Ø1.¸¸Ä¿Â¼ 2.ËùÓĞÎÄ¼ş¼
         if not len(arr)==0:
             w.append(arr)
 m=len(w)
-outputpath="F:/python/handlewithout.txt"
+outputpath="F:/python/souhuhandlewithout.txt"
 file_object = codecs.open(outputpath,'w','utf-8')
 try:
     file_object.write(str(m)+'\n')

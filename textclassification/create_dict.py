@@ -28,6 +28,6 @@ for parent,dirnames,filenames in dir:    #Èý¸ö²ÎÊý£º·Ö±ð·µ»Ø1.¸¸Ä¿Â¼ 2.ËùÓÐÎÄ¼þ¼
         for w in arr:
             vocab.add(w)
 
-create_txt("F:\\python\\vocab.txt", vocab)
+create_txt("F:\\python\\vocab1.txt", vocab)
         
         

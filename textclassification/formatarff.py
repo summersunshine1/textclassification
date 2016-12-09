@@ -7,8 +7,11 @@ def formatonecate(theta,category,topics):
     count=0 
     m=len(theta)
     l=len(category)
-    trainpath="F:\\model.arff"
+    # trainpath="F:\\souhumodel150.arff"
+    
+    trainpath="F:\\datatest100.arff"
     if os.path.exists(trainpath):
+        os.remove(trainpath)      
         os.remove(trainpath)      
     train_file=codecs.open(trainpath,'w','utf-8')
     try:
@@ -36,7 +39,8 @@ def formatonecate(theta,category,topics):
         train_file.close()
 
 #first traverse folder to know how many docs in a theme
-rootdir = "F:\\answer"
+# rootdir = "F:\\souhutrain"
+rootdir = "F:\\datatest"
 category=[]
 dir = os.walk(rootdir)
 total=0
@@ -46,7 +50,7 @@ for parent,dirnames,filenames in dir:    #三个参数：分别返回1.父目录
         cate+=1
     if not cate==0:
         category.append(cate)
-thetapath="F:/Android/JGibbLDA-v.1.0/models/casestudy-en/model-final.theta"
+thetapath="F:/Android/JGibbLDA-v.1.0/models/casestudy-en/datatesthandle.txt.model-final.theta"
 theta_file = codecs.open(thetapath,'r','utf-8')
 theta=[]
 wordlen=0

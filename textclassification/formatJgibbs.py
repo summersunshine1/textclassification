@@ -1,11 +1,11 @@
 import os
 import codecs
 
-rootdir = "F:/dataset"
+rootdir = "F:/datatest"
 dir = os.walk(rootdir)
-newfilepath="F:/python/handle1.txt"
+newfilepath="F:/Android/JGibbLDA-v.1.0/models/casestudy-en/datatesthandle.txt"
 cw=[]
-vocabpath="F:/python/vocab1.txt"
+vocabpath="F:/python/datatrainvocab.txt"
 
 vocabfile=codecs.open(vocabpath,'r','utf-8')
 try:
@@ -28,6 +28,8 @@ for parent,dirnames,filenames in dir:    #三个参数：分别返回1.父目录
             if wa in vocab:
                 tempw.append(wa)
         if len(tempw)==0:
+            if os.path.exists(path_name):
+                os.remove(path_name)
             continue
         cw.append(tempw)
 

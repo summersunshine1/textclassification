@@ -7,7 +7,7 @@ def formatonecate(theta,category):
     catenum=category[currentcate]
     count=0 
     m=len(theta)
-    trainpath="F:\\python\\traindata.txt"
+    trainpath="F:\\traindata.txt"
     if os.path.exists(trainpath):
         os.remove(trainpath)      
     train_file=codecs.open(trainpath,'w','utf-8')
@@ -33,7 +33,7 @@ def formatonecate(theta,category):
 
 
 #first traverse folder to know how many docs in a theme
-rootdir = "F:\\doc"
+rootdir = "F:\\souhutrain"
 category=[]
 dir = os.walk(rootdir)
 total=0
@@ -43,7 +43,7 @@ for parent,dirnames,filenames in dir:    #三个参数：分别返回1.父目录
         cate+=1
     if not cate==0:
         category.append(cate)
-thetapath="F:\\python\\model-final.theta"
+thetapath="F:\\model-final.theta"
 theta_file = codecs.open(thetapath,'r','utf-8')
 theta=[]
 try:
